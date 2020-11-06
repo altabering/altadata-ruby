@@ -1,0 +1,28 @@
+AllCops:
+  NewCops: enable
+
+Gemspec/RequiredRubyVersion:
+  Exclude:
+    - 'altadata.gemspec'
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'spec/altadata_spec.rb'
+
+Metrics/BlockLength:
+  Max: 66
+
+Metrics/ClassLength:
+  Max: 108
+
+Metrics/MethodLength:
+  Max: 19
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'lib/altadata/client.rb'
+
+Layout/LineLength:
+  Max: 145
