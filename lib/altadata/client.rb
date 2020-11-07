@@ -7,21 +7,29 @@ module Altadata
   class Client
     attr_accessor :api_key
 
+    ##
+    # Sets the api key and api urls required to access the Altadata API.
     def initialize(api_key)
       @api_key = api_key
       @data_api_url = 'https://www.altadata.io/data/api/'
       @subscription_api_url = "https://www.altadata.io/subscription/api/subscriptions?api_key=#{@api_key}"
     end
 
+    ##
+    # Retrieves customer's subscription info
     def list_subscription
       response = Faraday.get(@subscription_api_url)
       JSON.parse(response.body)
     end
 
+    ##
+    # Controls types of parameters
     def check_parameter(parameter_name, parameter, data_type)
       raise "#{parameter_name} parameter must be #{data_type}" unless parameter.is_a? data_type
     end
 
+    ##
+    # Retrieves data header as an array
     def get_header(product_code)
       check_parameter('product_code', product_code, String)
 
@@ -30,6 +38,8 @@ module Altadata
       JSON.parse(response.body)[0].keys
     end
 
+    ##
+    # Initializes retrieve data process
     def get_data(product_code, size = nil)
       check_parameter('product_code', product_code, String)
 
@@ -44,6 +54,8 @@ module Altadata
       self
     end
 
+    ##
+    # Select specific columns in the retrieve data process
     def select(selected_column)
       check_parameter('selected_column', selected_column, Array)
 
@@ -53,6 +65,8 @@ module Altadata
       self
     end
 
+    ##
+    # Sort data by given column and method in the retrieve data process
     def sort(order_column, order_method = 'asc')
       check_parameter('order_column', order_column, String)
       check_parameter('order_method', order_method, String)
@@ -64,6 +78,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Equal' condition by given column and value in the retrieve data process
     def equal(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
 
@@ -72,6 +88,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Not Equal' condition by given column and value in the retrieve data process
     def not_equal(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
 
@@ -80,6 +98,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Greater than' condition by given column and value in the retrieve data process
     def greater_than(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
 
@@ -88,6 +108,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Greater than equal' condition by given column and value in the retrieve data process
     def greater_than_equal(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
 
@@ -96,6 +118,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Less than' condition by given column and value in the retrieve data process
     def less_than(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
 
@@ -104,6 +128,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Less than equal' condition by given column and value in the retrieve data process
     def less_than_equal(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
 
@@ -112,6 +138,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'In' condition by given column and value in the retrieve data process
     def condition_in(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
       check_parameter('condition_value', condition_value, Array)
@@ -122,6 +150,8 @@ module Altadata
       self
     end
 
+    ##
+    # 'Not in' condition by given column and value in the retrieve data process
     def condition_not_in(condition_column, condition_value)
       check_parameter('condition_column', condition_column, String)
       check_parameter('condition_value', condition_value, Array)
@@ -132,6 +162,8 @@ module Altadata
       self
     end
 
+    ##
+    # Fetch data with configurations given before
     def load
       data = []
       page = 1
