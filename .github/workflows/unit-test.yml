@@ -22,3 +22,5 @@ jobs:
       run: |
         bundle install
         bundle exec rspec
+      env:
+        TEST_API_KEY: ${{ secrets.TEST_API_KEY }}
