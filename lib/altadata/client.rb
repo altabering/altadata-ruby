@@ -16,10 +16,36 @@ module Altadata
     end
 
     ##
+    # Converts subscription api response to unnested version
+    def fix_subscription_response(response_json)
+      data = []
+
+      response_json.each do |product|
+        product_item = product
+        product_item['createdAt'] = product_item['createdAt'].gsub('T', ' ').split('+')[0]
+        product_item['validUntil'] = product_item['validUntil'].gsub('T', ' ').split('+')[0]
+        product_item['title'] = product_item['offer']['title']
+        product_item['code'] = product_item['offer']['code']
+        product_item['price'] = product_item['plan']['price']
+        product_item['plan_name'] = product_item['plan']['title']
+        product_item['period'] = product_item['plan']['period']
+
+        product_item.delete('id')
+        product_item.delete('offer')
+        product_item.delete('plan')
+
+        data << product_item
+      end
+
+      data
+    end
+
+    ##
     # Retrieves customer's subscription info
     def list_subscription
       response = Faraday.get(@subscription_api_url)
-      JSON.parse(response.body)
+      response_json = JSON.parse(response.body)
+      fix_subscription_response(response_json)
     end
 
     ##

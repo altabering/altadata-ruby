@@ -17,7 +17,7 @@ RSpec.describe Altadata do
     product_code_arr = []
 
     subscription_info.each do |info|
-      product_code_arr << info['offer']['code']
+      product_code_arr << info['code']
     end
 
     product_code_list = %w[CO_10_JHUCS_04 CO_08_UNXXX_04
