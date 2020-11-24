@@ -39,7 +39,7 @@ RSpec.describe Altadata do
 
   it 'has a valid return at get_data method with sort' do
     data =
-      client.get_data(product_code = PRODUCT_CODE, size = 10)
+      client.get_data(product_code = PRODUCT_CODE, limit = 10)
             .equal(condition_column = 'province_state', condition_value = 'Alabama')
             .sort(order_column = 'reported_date', order_method = 'asc')
             .load
@@ -50,7 +50,7 @@ RSpec.describe Altadata do
   it 'has a valid return at get_data method with select' do
     selected_columns = %w[reported_date province_state mortality_rate]
     data =
-      client.get_data(product_code = PRODUCT_CODE, size = 10)
+      client.get_data(product_code = PRODUCT_CODE, limit = 10)
             .select(selected_column = selected_columns)
             .load
 
@@ -59,7 +59,7 @@ RSpec.describe Altadata do
 
   it 'has a valid return at get_data method with in' do
     data =
-      client.get_data(product_code = PRODUCT_CODE, size = 250)
+      client.get_data(product_code = PRODUCT_CODE, limit = 250)
             .condition_in(condition_column = 'province_state', condition_value = %w[Montana Utah])
             .load
 
@@ -78,7 +78,7 @@ RSpec.describe Altadata do
     check_list = %w[Montana Utah Alabama]
 
     data =
-      client.get_data(product_code = PRODUCT_CODE, size = 250)
+      client.get_data(product_code = PRODUCT_CODE, limit = 250)
             .condition_not_in(condition_column = 'province_state', condition_value = check_list)
             .load
 

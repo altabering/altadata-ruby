@@ -66,15 +66,15 @@ module Altadata
 
     ##
     # Initializes retrieve data process
-    def get_data(product_code, size = nil)
+    def get_data(product_code, limit = nil)
       check_parameter('product_code', product_code, String)
 
-      unless size.nil?
-        check_parameter('size', size, Integer)
-        raise 'size parameter must be greater than 0' unless size.positive?
+      unless limit.nil?
+        check_parameter('limit', limit, Integer)
+        raise 'limit parameter must be greater than 0' unless limit.positive?
       end
 
-      @size = size
+      @limit = limit
       @request_url_base = "#{@data_api_url}#{product_code}/?format=json"
 
       self
@@ -207,16 +207,16 @@ module Altadata
           data << item
         end
 
-        unless @size.nil?
+        unless @limit.nil?
           total_size += response_json.length
 
-          break if total_size > @size
+          break if total_size > @limit
         end
 
         page += 1
       end
 
-      data = data.first(@size) unless @size.nil?
+      data = data.first(@limit) unless @limit.nil?
 
       data
     end

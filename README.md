@@ -1,6 +1,6 @@
 # ALTADATA Ruby Client
 
-ALTADATA Ruby gem provides convenient access to the ALTADATA API from applications written in the Ruby language.
+[ALTADATA](https://www.altadata.io) Ruby gem provides convenient access to the ALTADATA API from applications written in the Ruby language.
 
 ## Installation
 
@@ -118,7 +118,7 @@ data =
 PRODUCT_CODE = 'co_10_jhucs_03'
 
 data =
-    client.get_data(product_code = PRODUCT_CODE, size = 20)
+    client.get_data(product_code = PRODUCT_CODE, limit = 20)
         .load
 ```
 
@@ -130,7 +130,7 @@ You can use multiple condition at same time.
 PRODUCT_CODE = 'co_10_jhucs_03'
 
 data =
-    client.get_data(product_code = PRODUCT_CODE, size = 100)
+    client.get_data(product_code = PRODUCT_CODE, limit = 100)
         .condition_in(condition_column = "province_state", condition_value = %w[Montana Utah])
         .sort(order_column = 'mortality_rate', order_method = 'desc')
         .select(selected_column = %w[reported_date province_state mortality_rate])
