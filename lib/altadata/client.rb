@@ -17,7 +17,7 @@ module Altadata
 
     ##
     # Converts subscription api response to unnested version
-    def fix_subscription_response(response_json)
+    def fix_response(response_json)
       data = []
 
       response_json.each do |product|
@@ -45,7 +45,7 @@ module Altadata
     def list_subscription
       response = Faraday.get(@subscription_api_url)
       response_json = JSON.parse(response.body)
-      fix_subscription_response(response_json)
+      fix_response(response_json)
     end
 
     ##
@@ -220,5 +220,7 @@ module Altadata
 
       data
     end
+
+    private :fix_response, :check_parameter
   end
 end

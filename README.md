@@ -1,6 +1,10 @@
 # ALTADATA Ruby Client
 
-[ALTADATA](https://www.altadata.io) Ruby gem provides convenient access to the ALTADATA API from applications written in the Ruby language.
+[![Build Actions status](https://github.com/altabering/altadata-ruby/workflows/build/badge.svg)](https://github.com/altabering/altadata-ruby/actions)
+
+[![Gem Version](https://badge.fury.io/rb/altadata.svg)](https://badge.fury.io/rb/altadata)
+
+[ALTADATA](https://www.altadata.io) Ruby gem provides convenient access to the ALTADATA API from applications written in the Ruby language. With this Ruby gem, developers can build applications around the ALTADATA API without having to deal with accessing and managing requests and responses.
 
 ## Installation
 
@@ -72,6 +76,17 @@ data =
         .load
 ```
 
+### not equal condition
+
+```ruby
+PRODUCT_CODE = 'co_10_jhucs_03'
+
+data =
+    client.get_data(product_code = PRODUCT_CODE)
+        .not_equal(condition_column = 'province_state', condition_value = 'Montana')
+        .load
+```
+
 ### in condition
 
 ```ruby
@@ -85,6 +100,19 @@ data =
 
 > condition_value parameter of condition_in method must be Array
 
+### not in condition
+
+```ruby
+PRODUCT_CODE = 'co_10_jhucs_03'
+
+data =
+    client.get_data(product_code = PRODUCT_CODE)
+        .condition_not_in(condition_column = 'province_state', condition_value = %w[Montana Utah Alabama])
+        .load
+```
+
+> condition_value parameter of condition_not_in method must be Array
+
 ### sort operation
 
 ```ruby
@@ -97,7 +125,6 @@ data =
 ```
 
 > Default value of order_method parameter is 'asc' and order_method parameter must be 'asc' or 'desc'
-
 
 ### select specific columns
 
