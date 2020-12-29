@@ -1,7 +1,7 @@
 # ALTADATA Ruby Client
 
 [![Build status](https://github.com/altabering/altadata-ruby/workflows/build/badge.svg)](https://github.com/altabering/altadata-ruby/actions)
-[![Gem Version](https://badge.fury.io/rb/altadata.svg)](https://badge.fury.io/rb/altadata)
+[![Gem Version](https://badge.fury.io/rb/altadata.svg)](https://rubygems.org/gems/altadata)
 
 [ALTADATA](https://www.altadata.io) Ruby gem provides convenient access to the ALTADATA API from applications written in the Ruby language. With this Ruby gem, developers can build applications around the ALTADATA API without having to deal with accessing and managing requests and responses.
 
